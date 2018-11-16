@@ -1,5 +1,5 @@
   
-# README.md  
+# memo.md  
   
 ## 目的  
   
@@ -122,45 +122,45 @@ The ID of the card to update
 idList  
 The ID of the list the card should be in  
 ```  
-
+  
 デバッグで実装  
   
-デバッグ削除とコメント 
-
-テスト
-
-## ラッパーファイルの修正
-
-ファイル名の修正
-```
-cd C:\Users\shino\doc\trello_move_green_to_plan
-move get_green.bat move_green.bat
-git add *
-git commit -m "Add card movement process"
-git push
-```
-
-ラッパーファイル内の修正
-
-テスト
-WoX から起動
-
-## リードミー作成
-
-リードミー作成
-```
-cd C:\Users\shino\doc\trello_move_green_to_plan
+デバッグ削除とコメント  
+  
+テスト  
+  
+## ラッパーファイルの修正  
+  
+ファイル名の修正  
+```  
+cd C:\Users\shino\doc\trello_move_green_to_plan  
+move get_green.bat move_green.bat  
+git add *  
+git commit -m "Add card movement process"  
+git push  
+```  
+  
+ラッパーファイル内の修正  
+  
+テスト  
+WoX から起動  
+  
+## リードミー作成  
+  
+リードミー作成  
+```  
+cd C:\Users\shino\doc\trello_move_green_to_plan  
 copy README.md memo.md  
 git add *  
 git commit -m "Add memo.md"  
 git push  
-```
-
-メモの修正
-タイトル部分ぐらい
-
-リードミーの修正
-使い方、必要な部分だけを記載してゆく
-クリップボードへのコピーとほぼ同じで良い
-
+```  
+  
+メモの修正  
+タイトル部分ぐらい  
+  
+リードミーの修正  
+使い方、必要な部分だけを記載してゆく  
+クリップボードへのコピーとほぼ同じで良い  
+  
 EOF  
