@@ -4,7 +4,7 @@
 ## 目的  
   
 plan の効率化  
-trello で緑ラベルが付いているものだけを Plan リストに移動  
+WoX から起動して trello で緑タグが付いているものだけを Plan リストに移動するスクリプト  
   
 ## 参照  
   
@@ -14,153 +14,77 @@ https://github.com/shinonome128/trello_move_green_to_plan
 緑ラベルをクリップに移動  
 https://github.com/shinonome128/trello_move_green_to_clip  
   
-Trello API ガイド 、 /cards/{id} パラメータ説明  
-https://developers.trello.com/reference/#cardsid-1  
+py-trello 本家  
+https://github.com/sarumont/py-trello  
   
-## やること  
+py-trello 使い方  
+https://qiita.com/nozomale/items/c2c30fc2a8a89b37e921  
   
-レポジトリの作成  
-Trello クライアントから緑ラベルのカードを取得  
-取得したカードを Plan リストに移動  
+WoX 本家  
+http://www.wox.one/  
   
-## レポジトリの作成  
+## 使い方  
   
-レポジトリ名  
-```  
-trello_move_green_to_plan  
-```  
+1. WoX 起動  
+2. move_green.bat を呼び出す  
+3. 緑ラベルがついたカードが Plan リストに移動する  
   
-ディレクトリ  
-```  
-mkdir C:\Users\shino\doc\trello_move_green_to_plan  
-```  
+## セットアップ  
   
-README 作成  
+1. Trello のトークン取得、 py-trello 本家取説を参照  
 ```  
-cd C:\Users\shino\doc\trello_move_green_to_plan  
-echo # hoge>> README.md  
-```  
-内容をコピー  
+Getting your Trello OAuth Token  
   
-.gitignore 作成  
-```  
-cd C:\Users\shino\doc\trello_move_green_to_plan  
-echo # .gitignore>> .gitignore  
-echo *.swp>> .gitignore  
-```  
+Make sure the following environment variables are set:  
   
-github に登録  
-```  
-cd C:\Users\shino\doc\trello_move_green_to_plan  
-git init  
-git config --local user.email shinonome128@gmail.com  
-git config --local user.name "shinonome128"  
-git add .gitignore  
-git add README.md  
-git commit -m "first commit"  
-git remote add origin https://github.com/shinonome128/trello_move_green_to_plan.git  
-git push -u origin master  
+    TRELLO_API_KEY  
+    TRELLO_API_SECRET  
+  
+These are obtained from the link mentioned above.  
+  
+TRELLO_EXPIRATION is optional. Set it to a string such as 'never' or '1day'. Trello's default OAuth Token expiration is 30 days.  
+  
+Default permissions are read/write.  
+  
+More info on setting the expiration here: https://trello.com/docs/gettingstarted/#getting-a-token-from-a-user  
+  
+Run  
+  
+python ./trello/util.py  
 ```  
   
-## Trello クライアントから緑ラベルのカードを取得  
-  
-クリップボードへ移動するときのコードを流用  
-  
+2. conf.txt を作成、トークン、 取得したいボード名、ラベル名、宛先リスト名を入れる  
 ```  
-cd C:\Users\shino\doc\trello_move_green_to_clip  
-copy .gitignore C:\Users\shino\doc\trello_move_green_to_plan  
-copy conf.txt C:\Users\shino\doc\trello_move_green_to_plan  
-copy conf_sample.txt C:\Users\shino\doc\trello_move_green_to_plan  
-copy get_card.py C:\Users\shino\doc\trello_move_green_to_plan  
-copy get_green.bat C:\Users\shino\doc\trello_move_green_to_plan  
-xcopy py-trello C:\Users\shino\doc\trello_move_green_to_plan\py-trello /s/e/i  
-```  
+[API]  
+API_Key = hoge  
+API_SECRET = hoge  
+OAUTH_TOKEN = hoge  
+OAUTH_TOKEN_SECRET = hoge  
   
-先に .gitignore だけ同期  
-```  
-cd C:\Users\shino\doc\trello_move_green_to_plan  
-git add .gitignore  
-git commit -m "first commit"  
-git push  
+[ENV]  
+BOARD_NAME = hoge  
+TAG_NAME = hoge  
+DST_LIST_NAME = hoge  
 ```  
   
-のこりを同期  
-```  
-cd C:\Users\shino\doc\trello_move_green_to_plan  
-git add *  
-git commit -m "first commit"  
-git push  
-```  
+3. WoX 呼び出し用のバッチファイルの中身でパスを修正  
   
-ファイル名変更  
-```  
-cd C:\Users\shino\doc\trello_move_green_to_plan  
-move get_card.py move_card.py  
-git add *  
-git commit -m "first commit"  
-git push  
-```  
+## ファイルの説明  
   
-## 取得したカードを Plan リストに移動  
+move_card.py  
+指定したボードの、緑ラベルのカード名を宛先リストに移動する処理  
   
-カード名を渡して指定のリストに渡す方法を調査  
+conf_sample.txt  
+設定ファイル  
+中身を書き換えたら、conf.txt にリネーム  
   
-card.py で定義されていそう  
-```  
-    def change_list(self, list_id):  
-        self.client.fetch_json(  
-            '/cards/' + self.id + '/idList',  
-            http_method='PUT',  
-            post_args={'value': list_id})  
-```  
+move_green.bat  
+WoX から呼び出す時にラッパー  
   
-API ガイドでパラメータを調査  
-カード ID と 宛先リスト ID を渡せば、 PUT で対応していそう  
-```  
-id  
-The ID of the card to update  
-idList  
-The ID of the list the card should be in  
-```  
-
-デバッグで実装  
+py-trello/  
+Trello クライアント  
   
-デバッグ削除とコメント 
-
-テスト
-
-## ラッパーファイルの修正
-
-ファイル名の修正
-```
-cd C:\Users\shino\doc\trello_move_green_to_plan
-move get_green.bat move_green.bat
-git add *
-git commit -m "Add card movement process"
-git push
-```
-
-ラッパーファイル内の修正
-
-テスト
-WoX から起動
-
-## リードミー作成
-
-リードミー作成
-```
-cd C:\Users\shino\doc\trello_move_green_to_plan
-copy README.md memo.md  
-git add *  
-git commit -m "Add memo.md"  
-git push  
-```
-
-メモの修正
-タイトル部分ぐらい
-
-リードミーの修正
-使い方、必要な部分だけを記載してゆく
-クリップボードへのコピーとほぼ同じで良い
-
+memo.md  
+作成時のメモ書き  
+  
 EOF  
