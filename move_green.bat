@@ -4,5 +4,5 @@ REM ///////////////////////////////////////////////////
 REM WOXÇ©ÇÁí@Ç≠Ç∆é∏îsÇ∑ÇÈÇÃÇ≈ë„ë÷çÙ
 REM ///////////////////////////////////////////////////
 
-cd C:\Users\shino\doc\trello_move_green_to_clip
-start get_card.py
+cd C:\Users\shino\doc\trello_move_green_to_plan
+start move_card.py

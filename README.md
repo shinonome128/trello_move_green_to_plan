@@ -122,9 +122,29 @@ The ID of the card to update
 idList  
 The ID of the list the card should be in  
 ```  
-  
+
 デバッグで実装  
   
-ここから再開  
-  
+デバッグ削除とコメント 
+
+テスト
+
+## ラッパーファイルの修正
+
+ファイル名の修正
+```
+cd C:\Users\shino\doc\trello_move_green_to_plan
+move get_green.bat move_green.bat
+git add *
+git commit -m "Add card movement process"
+git push
+```
+
+ラッパーファイル内の修正
+
+テスト
+WoX から起動
+
+## リードミーとメモの分離
+
 EOF  
