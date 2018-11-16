@@ -100,7 +100,7 @@ git add *
 git commit -m "first commit"  
 git push  
 ```  
-
+  
 ## 取得したカードを Plan リストに移動  
   
 カード名を渡して指定のリストに渡す方法を調査  
@@ -125,6 +125,6 @@ The ID of the list the card should be in
   
 デバッグで実装  
   
-ここから再開
-
+ここから再開  
+  
 EOF  
